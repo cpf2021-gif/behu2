@@ -23,12 +23,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: userinfoHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
-				Path:    "/set-cookie",
-				Handler: setCookieHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/refresh",
 				Handler: refreshHandler(serverCtx),
 			},

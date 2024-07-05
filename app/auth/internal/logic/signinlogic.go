@@ -9,6 +9,7 @@ import (
 
 	"github.com/casdoor/casdoor-go-sdk/casdoorsdk"
 	"github.com/zeromicro/go-zero/core/logx"
+	"golang.org/x/oauth2"
 )
 
 type SigninLogic struct {
@@ -25,17 +26,13 @@ func NewSigninLogic(ctx context.Context, svcCtx *svc.ServiceContext) *SigninLogi
 	}
 }
 
-func (l *SigninLogic) Signin(req *types.SignInRequest) (*types.SignInResponse, error) {
+func (l *SigninLogic) Signin(req *types.SignInRequest) (*types.SignInResponse, *oauth2.Token, error) {
 	token, err := casdoorsdk.GetOAuthToken(req.Code, req.State)
 	if err != nil {
-		return nil, errors.New("failed to get OAuth token")
+		return nil, nil, errors.New("failed to get OAuth token")
 	}
 
 	return &types.SignInResponse{
 		Status: "ok",
-		Data: types.TokenPair{
-			AccessToken:  token.AccessToken,
-			RefreshToken: token.RefreshToken,
-		},
-	}, nil
+	}, token, nil
 }

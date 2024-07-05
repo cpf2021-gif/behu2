@@ -3,7 +3,6 @@ package logic
 import (
 	"context"
 	"errors"
-	"strings"
 
 	"behu2/app/auth/internal/svc"
 	"behu2/app/auth/internal/types"
@@ -26,18 +25,16 @@ func NewUserinfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Userinfo
 	}
 }
 
-func (l *UserinfoLogic) Userinfo(req *types.UserInfoRequest) (*types.UserInfoResponse, error) {
-	authHeader := req.AccessToken
-	if authHeader == "" {
-		return nil, errors.New("no access token")
+func (l *UserinfoLogic) Userinfo() (*types.UserInfoResponse, error) {
+	cookie := l.ctx.Value("token")
+	var token string
+	if cookieStr, ok := cookie.(string); ok {
+		token = cookieStr
+	} else {
+		return nil, errors.New("invalid token")
 	}
 
-	token := strings.Split(authHeader, "Bearer ")
-	if len(token) != 2 {
-		return nil, errors.New("token is not Bearer token")
-	}
-
-	claims, err := casdoorsdk.ParseJwtToken(token[1])
+	claims, err := casdoorsdk.ParseJwtToken(token)
 	if err != nil {
 		return nil, errors.New("failed to parse token")
 	}

@@ -7,17 +7,7 @@ type SignInRequest struct {
 }
 
 type SignInResponse struct {
-	Status string    `json:"status"`
-	Data   TokenPair `json:"data"`
-}
-
-type TokenPair struct {
-	AccessToken  string `json:"access_token"`
-	RefreshToken string `json:"refresh_token"`
-}
-
-type UserInfoRequest struct {
-	AccessToken string `header:"Authorization"`
+	Status string `json:"status"`
 }
 
 type UserInfoResponse struct {
@@ -30,16 +20,6 @@ type UserInfo struct {
 	Avatar      string `json:"avatar"`
 }
 
-type SetCookieRequest struct {
-	RefreshToken string `header:"Authorization"`
-}
-
-type SetCookieResponse struct {
-	Status      string `json:"status"`
-	AccessToken string `json:"data"`
-}
-
 type RefreshResponse struct {
-	Status      string `json:"status"`
-	AccessToken string `json:"data"`
+	Status string `json:"status"`
 }

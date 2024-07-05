@@ -42,8 +42,7 @@ func (l *RefreshLogic) Refresh() (resp *types.RefreshResponse, refreshToken stri
 	}
 
 	resp = &types.RefreshResponse{
-		Status:      "ok",
-		AccessToken: newTokenPair.AccessToken,
+		Status: "ok",
 	}
 
 	expiry = newTokenPair.Expiry

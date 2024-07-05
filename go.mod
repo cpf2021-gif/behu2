@@ -5,6 +5,7 @@ go 1.22.3
 require (
 	github.com/casdoor/casdoor-go-sdk v0.47.0
 	github.com/zeromicro/go-zero v1.6.6
+	golang.org/x/oauth2 v0.18.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -42,7 +43,6 @@ require (
 	go.opentelemetry.io/proto/otlp v1.0.0 // indirect
 	go.uber.org/automaxprocs v1.5.3 // indirect
 	golang.org/x/net v0.26.0 // indirect
-	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sys v0.21.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
