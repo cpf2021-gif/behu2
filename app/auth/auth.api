@@ -1,0 +1,67 @@
+syntax = "v1"
+
+info (
+	title: "authapi"
+	desc: "auth api"
+	author: "xypf"
+	email: "2992247892@qq.com"
+)
+
+@server(
+	prefix: /api
+)
+service auth-api {
+	@handler signin
+	post /signin (SignInRequest) returns (SignInResponse)
+
+	@handler userinfo
+	get /userinfo (UserInfoRequest) returns	(UserInfoResponse)
+
+	@handler setCookie
+	get /set-cookie (SetCookieRequest) returns (SetCookieResponse)
+
+	@handler refresh
+	get /refresh returns (RefreshResponse)
+}
+
+// signin
+type SignInRequest {
+	Code  string `form:"code"`
+	State string `form:"state"`
+}
+type SignInResponse {
+	Status string    `json:"status"`
+	Data   TokenPair `json:"data"`
+}
+type TokenPair {
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
+// userinfo
+type UserInfoRequest {
+	AccessToken string `header:"Authorization"`
+}
+type UserInfoResponse {
+	Status string   `json:"status"`
+	Data   UserInfo `json:"data"`
+}
+type UserInfo {
+	DisplayName string `json:"displayNname"`
+	Avatar      string `json:"avatar"`
+}
+
+// setCookie
+type SetCookieRequest {
+	RefreshToken string `header:"Authorization"`
+}
+type SetCookieResponse {
+	Status      string `json:"status"`
+	AccessToken string `json:"data"`
+}
+
+// refresh
+type RefreshResponse {
+	Status      string `json:"status"`
+	AccessToken string `json:"data"`
+}

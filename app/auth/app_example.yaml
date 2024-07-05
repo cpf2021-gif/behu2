@@ -1,0 +1,10 @@
+certificate: |
+  -----BEGIN CERTIFICATE-----
+  your_certificate_here
+  -----END CERTIFICATE-----
+server:
+  endpoint: "YOUR_CASDOOR_ENDPOINT"
+  client_id: "YOUR_CLIENT_ID"
+  client_secret: "YOUR_CLIENT_SECRET"
+  organization: "YOUR_ORGANIZATION"
+  application: "YOUR_APPLICATION"

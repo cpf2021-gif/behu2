@@ -1,0 +1,5 @@
+# Ignore all xxx.yaml files
+*.yaml
+
+# Do not ignore xxx_example.yaml files
+!*_example.yaml
